@@ -1,0 +1,536 @@
+/* cart-checkout.css - Cart drawer, bill itemization, tip selector, address picker, and UPI payment demo */
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  margin: 24px 0 50px 0;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.cart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.cart-rest-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-rest-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+.cart-rest-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.cart-rest-sub {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+/* Cart Items List */
+.cart-items-table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border-light);
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.cart-item-custom-tags {
+  font-size: 12px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.cart-item-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  min-width: 70px;
+  text-align: right;
+}
+
+/* Notes & Instructions */
+.delivery-notes-input {
+  width: 100%;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 13px;
+  background: var(--bg-alt);
+  color: var(--text-main);
+  resize: vertical;
+  min-height: 50px;
+}
+
+.delivery-notes-input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+/* Tip Delivery Partner */
+.tip-selector-section {
+  margin: 18px 0;
+}
+
+.tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tip-chips-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tip-chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-medium);
+  background: var(--bg-surface);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tip-chip:hover {
+  border-color: var(--primary);
+}
+
+.tip-chip.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Coupons Section */
+.coupon-input-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.coupon-field {
+  flex: 1;
+  border: 1.5px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-alt);
+}
+
+.coupon-field:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+.btn-apply-coupon {
+  padding: 10px 18px;
+  background: var(--text-main);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.btn-apply-coupon:hover {
+  background: var(--primary);
+}
+
+.applied-coupon-tag {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.coupon-success-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #065f46;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-remove-coupon {
+  color: #b91c1c;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Bill Details Breakdown */
+.bill-summary-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 22px;
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
+}
+
+.bill-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bill-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-row.discount-row {
+  color: var(--veg-color);
+  font-weight: 700;
+}
+
+.bill-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 8px 0;
+}
+
+.bill-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  padding-top: 8px;
+}
+
+.btn-checkout-proceed {
+  width: 100%;
+  margin-top: 18px;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-checkout-proceed:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+/* Checkout View Styles */
+.checkout-section-header {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.address-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.address-card-radio {
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: var(--bg-surface);
+}
+
+.address-card-radio:hover {
+  border-color: var(--primary);
+}
+
+.address-card-radio.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.address-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.address-card-flat {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.address-card-details {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.4;
+}
+
+/* Payment Method Cards */
+.payment-methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.payment-method-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-medium);
+  cursor: pointer;
+  background: var(--bg-surface);
+  transition: all 0.2s ease;
+}
+
+.payment-method-card:hover {
+  border-color: var(--primary);
+}
+
+.payment-method-card.selected {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.payment-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.payment-method-info {
+  flex: 1;
+}
+
+.payment-method-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-method-sub {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+/* UPI Payment Demo Modal */
+.upi-modal-content {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.upi-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.upi-logo-pill {
+  background: #0070ba;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.upi-amount-badge {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.upi-qr-box {
+  width: 190px;
+  height: 190px;
+  margin: 0 auto 16px auto;
+  padding: 12px;
+  background: #ffffff;
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.upi-qr-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.upi-timer {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--warning);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Demo Mode Box */
+.demo-mode-box {
+  background: #f8fafc;
+  border: 1px dashed #64748b;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.demo-mode-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.demo-buttons-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-demo-success {
+  background: #10b981;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-demo-success:hover {
+  background: #059669;
+}
+
+.btn-demo-fail {
+  background: #ef4444;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.btn-demo-fail:hover {
+  background: #dc2626;
+}

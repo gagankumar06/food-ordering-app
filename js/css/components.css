@@ -1,0 +1,680 @@
+/* components.css - Reusable UI components: cards, filters, banners, badges, location modal */
+
+/* Search Hero Bar */
+.search-container {
+  margin: 18px 0 14px 0;
+  position: relative;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.search-input-wrap:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.search-icon {
+  font-size: 18px;
+  color: var(--text-sub);
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-clear-btn {
+  font-size: 16px;
+  color: var(--text-muted);
+  display: none;
+  cursor: pointer;
+}
+
+/* Radius & Quick Filters Bar */
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 0 16px 0;
+  scrollbar-width: none;
+}
+
+.filters-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.radius-filter-group {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  padding: 3px 4px;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.radius-filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-sub);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.radius-pill {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-sub);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.radius-pill.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary);
+}
+
+.filter-chip.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.filter-chip.veg-chip.active {
+  background: var(--veg-bg);
+  border-color: var(--veg-color);
+  color: var(--veg-color);
+}
+
+/* Category Grid & Scroller */
+.categories-section {
+  margin: 12px 0 24px 0;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+.categories-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.categories-track::-webkit-scrollbar {
+  display: none;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 82px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-3px);
+}
+
+.category-card.active .category-img-wrap {
+  box-shadow: 0 0 0 3px var(--primary);
+  transform: scale(1.05);
+}
+
+.category-card.active .category-name {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.category-img-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-alt);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Promo Banner Cards */
+.promos-banner-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.promo-banner {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.promo-banner.accent-orange {
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%);
+}
+
+.promo-banner.accent-teal {
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+}
+
+.promo-content {
+  z-index: 2;
+  max-width: 65%;
+}
+
+.promo-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.promo-heading {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.promo-sub {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+.promo-code-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #1e1b4b;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.promo-icon-art {
+  font-size: 56px;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+/* Restaurants Grid & Cards */
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+.restaurant-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+}
+
+.restaurant-img-box {
+  position: relative;
+  width: 100%;
+  height: 185px;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.restaurant-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.restaurant-card:hover .restaurant-img {
+  transform: scale(1.05);
+}
+
+/* Image Overlays */
+.restaurant-img-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%);
+}
+
+.restaurant-badge-offer {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-left: 3px solid var(--primary);
+}
+
+.restaurant-closed-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  gap: 4px;
+  z-index: 3;
+}
+
+.closed-badge {
+  background: var(--nonveg-color);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.out-of-reach-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Restaurant Content */
+.restaurant-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.rest-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.restaurant-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--rating-green);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.rest-cuisines {
+  font-size: 13px;
+  color: var(--text-sub);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 12px;
+}
+
+.rest-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-sub);
+  font-weight: 600;
+  border-top: 1px dashed var(--border-light);
+  padding-top: 10px;
+  margin-top: auto;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.meta-item.highlight-distance {
+  color: var(--primary);
+  font-weight: 700;
+  background: var(--primary-light);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+/* Empty State */
+.empty-state-box {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px dashed var(--border-medium);
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon {
+  font-size: 56px;
+  margin-bottom: 14px;
+}
+
+.empty-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: var(--text-sub);
+  max-width: 420px;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.35);
+}
+
+.btn-secondary {
+  background: var(--bg-alt);
+  color: var(--text-main);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid var(--border-medium);
+}
+
+.btn-secondary:hover {
+  background: var(--border-light);
+}
+
+/* Indian FSSAI Standard Veg / Non-Veg Badges */
+.food-type-icon {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--veg-color);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #ffffff;
+  padding: 2px;
+}
+
+.food-type-icon.veg .type-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--veg-color);
+}
+
+.food-type-icon.non-veg {
+  border-color: var(--nonveg-color);
+}
+
+.food-type-icon.non-veg .type-dot {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid var(--nonveg-color);
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Location Selection Modal Styling */
+.location-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gps-detect-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--primary-light);
+  border: 1.5px dashed var(--primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gps-detect-card:hover {
+  background: var(--primary-light-hover, rgba(var(--primary-rgb), 0.18));
+}
+
+.gps-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.gps-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.gps-subtitle {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.preset-locations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preset-location-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-location-item:hover {
+  background: var(--bg-alt);
+  border-color: var(--primary);
+}
+
+.preset-location-item.selected {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.location-item-icon {
+  font-size: 18px;
+  color: var(--primary);
+  margin-top: 2px;
+}
+
+.location-item-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.location-item-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+}

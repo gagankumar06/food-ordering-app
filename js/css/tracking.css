@@ -1,0 +1,370 @@
+/* tracking.css - Multi-stage live order tracking, rider map route animation, and order summary */
+
+.tracking-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  margin: 24px 0 50px 0;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .tracking-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tracking-main-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+.tracking-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tracking-order-id-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.tracking-eta-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--veg-color);
+  background: #ecfdf5;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.tracking-headline {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.tracking-subline {
+  font-size: 14px;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+}
+
+/* Interactive Simulation Bar for Demo Testing */
+.tracking-demo-toolbar {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.demo-toolbar-label {
+  font-size: 12px;
+  font-weight: 800;
+  color: #1e40af;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-step-next {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.btn-step-next:hover {
+  background: #1d4ed8;
+}
+
+/* Animated Rider Map Route Simulation */
+.tracking-map-canvas-container {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.map-route-line {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 6px;
+  background: #94a3b8;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.map-route-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.map-pin.rest-pin {
+  left: 15%;
+}
+
+.map-pin.dest-pin {
+  left: 85%;
+}
+
+.pin-bubble {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.pin-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+.map-rider-bike {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.5);
+  transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: riderPulse 1.5s infinite;
+}
+
+@keyframes riderPulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(var(--primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
+}
+
+/* 5-Stage Timeline */
+.tracking-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 28px;
+}
+
+.tracking-timeline::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 14px;
+  width: 3px;
+  background: var(--border-medium);
+}
+
+.timeline-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-marker {
+  position: absolute;
+  left: -36px;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 3px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.timeline-step.completed .step-marker {
+  background: var(--veg-color);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 138, 95, 0.3);
+}
+
+.timeline-step.active .step-marker {
+  background: var(--primary);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 0 4px var(--primary-light);
+  animation: stepPulse 1.8s infinite;
+}
+
+@keyframes stepPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.step-content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.timeline-step.active .step-title {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.step-time {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 2px;
+}
+
+/* Delivery Partner Card */
+.delivery-partner-card {
+  background: var(--bg-alt);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.partner-info-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.partner-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.partner-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.partner-vehicle {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.partner-call-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--veg-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(15, 138, 95, 0.3);
+}
+
+.partner-call-btn:hover {
+  transform: scale(1.08);
+}
