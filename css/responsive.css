@@ -1,0 +1,110 @@
+/* responsive.css - Mobile-first layout optimizations, bottom sheet modals, and media queries */
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 80px;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  .deliver-to-selector {
+    max-width: 180px;
+    padding: 6px 10px;
+  }
+
+  .deliver-address {
+    font-size: 11px;
+  }
+
+  .deliver-label {
+    font-size: 10px;
+  }
+
+  .header-btn.desktop-only {
+    display: none;
+  }
+
+  /* Show Bottom Navigation */
+  .bottom-nav {
+    display: flex;
+  }
+
+  /* Modal turns into a modern mobile Bottom Sheet */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-sheet {
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 85vh;
+    animation: sheetSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes sheetSlideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .restaurants-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .promos-banner-row {
+    grid-template-columns: 1fr;
+  }
+
+  .rest-hero-banner {
+    height: 180px;
+  }
+
+  .rest-hero-name {
+    font-size: 20px;
+  }
+
+  .rest-hero-meta-bar {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .food-item-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .food-action-col {
+    width: 110px;
+    height: 120px;
+  }
+
+  .food-item-img {
+    height: 90px;
+  }
+
+  .food-add-wrap {
+    width: 95px;
+    height: 34px;
+  }
+
+  .btn-add-food {
+    font-size: 13px;
+  }
+
+  .tracking-headline {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}
